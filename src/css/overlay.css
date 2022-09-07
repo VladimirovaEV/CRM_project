@@ -1,0 +1,33 @@
+.overlay,
+.overlayModal,
+.modal__overlay {
+  display: none;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  overflow: auto;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.overlay.active {
+  display: flex;
+}
+.overlayModal.active {
+  display: flex;
+}
+.modal__overlay.active {
+  display: flex;
+}
+.overlay__modal,
+.overlay__modalEdit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+}
