@@ -13,6 +13,8 @@ const {
   inputCount,
   overlayModalElement,
   imgContainer,
+  modalError,
+  modalErrBtn,
 } = getElements;
 import {getRandomId} from './utils';
 import {createRow, addGoodPage, addGoodData, createModalEdit} from './createElements';
@@ -57,14 +59,27 @@ const modalControl = () => {
     }
   });
 };
+const modalErrControl = () => {
+  modalError.addEventListener('click', (e) => {
+    const target = e.target;
+    if (target === modalError || target.closest('.modal__close_err')) {
+      modalError.classList.remove('active');
+    }
+  })
+}
+modalErrControl();
 let totalPrice = 0;
 let newCrmTotalPrice;
 list.addEventListener('click', async (e) => {
       const target = e.target;
       if (target.closest('.table__btn_del')) {
         confirm('Подтвердите удаление товара')
+        // document.querySelector('.confirm__overlay').classList.add('active');
       }
+     
       if (confirm('Подтвердите удаление товара')) {
+      // if (target.closets('.confirm__btn')) {
+        // document.querySelector('.confirm__overlay').classList.remove('active');
         const parent = target.closest('tr');
         parent.remove();
         const elem = parent.querySelector('.table__cell_name');
@@ -72,7 +87,10 @@ list.addEventListener('click', async (e) => {
         newCrmTotalPrice = totalPrice -= result.count * result.price;
         crmTotalPrice.textContent = `$ ${newCrmTotalPrice}`;
         deleteGoods(elem.dataset.id);
-      };
+      } 
+      // if (target.closets('.reject__btn')) {
+      //   document.querySelector('.confirm__overlay').classList.remove('active');
+      // }
     });
     const calcModalTotalPrice = () => {
       inputPrice.addEventListener('blur', (e) => {
@@ -168,5 +186,6 @@ export default {
   calcModalTotalPrice,
   formControl,
   renderGoods,
+  modalErrControl,
 };
 

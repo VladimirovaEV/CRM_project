@@ -1,6 +1,7 @@
 .overlay,
 .overlayModal,
-.modal__overlay {
+.modal__overlay,
+.confirm__overlay {
   display: none;
   position: fixed;
   justify-content: center;
@@ -20,6 +21,9 @@
   display: flex;
 }
 .modal__overlay.active {
+  display: flex;
+}
+.confirm__overlay.active {
   display: flex;
 }
 .overlay__modal,

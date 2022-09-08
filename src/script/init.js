@@ -4,6 +4,7 @@ const {
   calcModalTotalPrice,
   formControl,
   renderGoods,
+  modalErrControl,
 } = control;
 import modalImg from './modalImg';
 import requests from './requests';
@@ -16,6 +17,7 @@ import search from './search';
 export const init = () => {
   renderGoods();
   modalControl();
+  modalErrControl();
   calcModalTotalPrice();
   formControl();
 };
