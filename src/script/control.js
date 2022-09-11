@@ -73,21 +73,20 @@ let newCrmTotalPrice;
 list.addEventListener('click', async (e) => {
       const target = e.target;
       if (target.closest('.table__btn_del')) {
-        confirm('Подтвердите удаление товара')
+        let quest = confirm('Подтвердите удаление товара')
         // document.querySelector('.confirm__overlay').classList.add('active');
-      }
-     
-      if (confirm('Подтвердите удаление товара')) {
-      // if (target.closets('.confirm__btn')) {
-        // document.querySelector('.confirm__overlay').classList.remove('active');
-        const parent = target.closest('tr');
+        if (quest) {
+          const parent = target.closest('tr');
         parent.remove();
         const elem = parent.querySelector('.table__cell_name');
         const result = await getGood(elem.dataset.id);
         newCrmTotalPrice = totalPrice -= result.count * result.price;
         crmTotalPrice.textContent = `$ ${newCrmTotalPrice}`;
         deleteGoods(elem.dataset.id);
-      } 
+        }
+      }
+      // // if (target.closets('.confirm__btn')) {
+      //   // document.querySelector('.confirm__overlay').classList.remove('active');
       // if (target.closets('.reject__btn')) {
       //   document.querySelector('.confirm__overlay').classList.remove('active');
       // }

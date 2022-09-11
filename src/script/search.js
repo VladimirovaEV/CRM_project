@@ -18,6 +18,7 @@ export function debounce(callback, delay) {
 }
 
 export async function searchValue() {
+     
     const tableRows = document.querySelectorAll('.table__cell');
     const result = await fetch(`http://localhost:3000/api/goods`);
     const data = await result.json();
@@ -30,16 +31,8 @@ export async function searchValue() {
         }
     })
 }
-const resetButton = document.querySelector('#search-clear');
-if (resetButton) {
-    resetButton.addEventListener('click', () => {
-    console.log('!');
-})
-}
-// panelInput.addEventListener('click', debounce(searchValue(panelInput.value), 300));
-panelInput.addEventListener('blur', () => {
-    searchValue();
-});
+
+panelInput.addEventListener('keyup', debounce(searchValue, 300));
 
 export default {
 
