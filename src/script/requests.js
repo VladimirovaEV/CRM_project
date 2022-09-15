@@ -16,6 +16,7 @@ const createGoods = async (newGood) => {
         'Content-Type': 'application/json',
         },
     });
+    return result;
     if (!result) {
         modalError.classList.add('active');
     }
@@ -27,7 +28,9 @@ const editGoods = async (id, editGood) => {
          headers: {
         'Content-Type': 'application/json',
     },
-    });
+    })
+    const data = await result.json();
+    return data;
 };
 const getGood = async (id) => {
     const result = await fetch(`http://localhost:3000/api/goods/${id}`);

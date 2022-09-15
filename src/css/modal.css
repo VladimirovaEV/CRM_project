@@ -213,7 +213,8 @@
   color: red;
 }
 
-.image-container {
+.image-container,
+.imageEdit-container {
   grid-area: file-add;
   position: relative;
   display: none;

@@ -9,6 +9,11 @@ const {
   overlayElement,
   overlayModalElement,
   modalForm,
+  fieldSet,
+  imgModal,
+  imgContainer,
+  modalWarning,
+  fileEdit
 } = getElements;
 export const createRow = function(item) {
   const trElement = document.createElement('tr');
@@ -36,7 +41,6 @@ export const addGoodPage = (list, item) => {
 export const addGoodData = async (item) => {
   item.id = Number(getRandomId());
   await createGoods(item);
-  location.reload();
 };
 export const createDataList = async () => {
   const dataList = document.createElement('datalist');
@@ -83,13 +87,13 @@ export const createModalEdit = (item) => {
 
           <label class="modal__label modal__label_name" for="title">
             <span class="modal__text">Наименование</span>
-            <input class="modal__input" type="text" name="title" id="title" value=${item.title}>
+            <input class="modal__input" type="text" name="title" id="title" value="${item.title}">
           </label>
 
 
           <label class="modal__label modal__label_category" for="category">
             <span class="modal__text">Категория</span>
-            <input class="modal__input" type="text" name="category" id="category" value=${item.category}>
+            <input class="modal__input" type="text" name="category" id="category" value="${item.category}">
           </label>
 
           <label class="modal__label modal__label_description" for="description">
@@ -99,7 +103,7 @@ export const createModalEdit = (item) => {
 
           <label class="modal__label modal__label_units" for="units">
             <span class="modal__text">Единицы измерения</span>
-            <input class="modal__input" type="text" name="units" id="units" value=${item.units}>
+            <input class="modal__input" type="text" name="units" id="units" value="${item.units}">
           </label>
 
           <div class="modal__label modal__label_discount">
@@ -113,16 +117,19 @@ export const createModalEdit = (item) => {
 
           <label class="modal__label modal__label_count" for="count">
             <span class="modal__text">Количество</span>
-            <input class="modal__input" type="text" name="count" id="count" value=${item.count}>
+            <input class="modal__input" type="text" name="count" id="count" value="${item.count}">
           </label>
 
           <label class="modal__label modal__label_price" for="price">
             <span class="modal__text">Цена</span>
-            <input class="modal__input" type="text" name="price" id="price" value=${item.price}>
+            <input class="modal__input" type="text" name="price" id="price" value="${item.price}">
           </label>
 
-          <label tabindex="0" for="image" class="modal__label modal__label_file">Добавить изображение</label>
-          <input class="modal__file visually-hidden" tabindex="-1" type="file" name="image" id="image" value=${item.image}>
+          <label tabindex="0" for="imageEdit" class="modal__label modal__label_file">Добавить изображение</label>
+          <input class="modalEdit__file visually-hidden" tabindex="-1" type="file" name="image" id="imageEdit" value="${item.image}">
+          <div class="imageEdit-container">
+          <img class="previewEdit">
+          </div>
         </fieldset>
 
         <div class="modal__footer">

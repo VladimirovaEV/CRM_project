@@ -23,7 +23,7 @@ export async function searchValue() {
     const result = await fetch(`http://localhost:3000/api/goods`);
     const data = await result.json();
     data.forEach(item => {
-        if ((panelInput.value.toLowerCase()) === item.category.toLowerCase()) {
+        if (((panelInput.value.toLowerCase()) === item.category.toLowerCase()) || ((item.title.toLowerCase()).includes(panelInput.value.toLowerCase()))) {
             for (let i = tableRows.length - 1; i >= 0; i--) {
                 tableRows[i].style.display = 'none';
             }

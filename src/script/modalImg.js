@@ -17,6 +17,7 @@ const {
   imgModal,
   imgContainer,
   modalWarning,
+  fileEdit,
 } = getElements;
 
 const toBase64 = file => new Promise((resolve, reject) => {
@@ -45,6 +46,7 @@ file.addEventListener('change', () => {
     }
   }
 });
+
 // modalForm.addEventListener('submit', async event => {
 //   event.preventDefault();
 //   const formData = new FormData(modalForm);

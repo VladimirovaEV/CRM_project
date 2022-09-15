@@ -15,6 +15,9 @@ const {
   imgContainer,
   modalError,
   modalErrBtn,
+  file,
+  imgModal,
+  modalWarning,
 } = getElements;
 import {getRandomId} from './utils';
 import {createRow, addGoodPage, addGoodData, createModalEdit} from './createElements';
@@ -44,10 +47,17 @@ const renderGoods = async function() {
 const openModal = () => {
     overlayElement.classList.add('active');
     descriptionId.textContent = getRandomId();
+    file.value = '';
+    imgModal.src = '';
+    imgContainer.style.display = 'none';
   };
 const closeModal = () => {
     overlayElement.classList.remove('active');
     modalForm.reset();
+    // input[type=file].value = '';
+    file.value = '';
+    imgModal.src = '';
+    imgContainer.style.display = 'none';
   };
 
 const modalControl = () => {
@@ -73,7 +83,7 @@ let newCrmTotalPrice;
 list.addEventListener('click', async (e) => {
       const target = e.target;
       if (target.closest('.table__btn_del')) {
-        let quest = confirm('Подтвердите удаление товара')
+        let quest = confirm('Подтвердите удаление товара');
         // document.querySelector('.confirm__overlay').classList.add('active');
         if (quest) {
           const parent = target.closest('tr');
@@ -151,18 +161,35 @@ list.addEventListener('click', async (e) => {
     const item = await getGood(elem.dataset.id);
     createModalEdit(item);
     openModalEdit();
+    const fileEdit = document.querySelector('.modalEdit__file');
+    const imgEditModal = document.querySelector('.previewEdit');
+    const imgEditContainer = document.querySelector('.imageEdit-container');
     
+    fileEdit.addEventListener('change', () => {
+  if (fileEdit.files.length > 0) {
+    if (fileEdit.files[0].size <= 1000000) {
+      const src = URL.createObjectURL(fileEdit.files[0]);
+      if (document.body.contains(modalWarning)) {
+         modalWarning.parentNode.removeChild(modalWarning);
+      };
+    imgEditModal.src = src;
+    imgEditContainer.style.display = 'block';
+    } else {
+      imgEditContainer.append(modalWarning);
+      imgEditContainer.style.display = 'block';
+    }
+  }
+});
+
     (document.querySelector('.modalEdit__form')).addEventListener('submit', async e => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const editGood = Object.fromEntries(formData);
     editGood.image = await toBase64(editGood.image);
-    
-    editGoods(elem.dataset.id, editGood);
-    const newItem = await getGood(item.id);
+    console.log(editGood);
+    const data = await editGoods(elem.dataset.id, editGood);
     parent.parentNode.removeChild(parent);
-    location.reload();
-    addGoodPage(list, newItem);
+    addGoodPage(list, data);
     
     closeModalEdit();
   });
@@ -174,8 +201,6 @@ list.addEventListener('click', async (e) => {
     }
   });
 });
-
-
 
 
 export default {
